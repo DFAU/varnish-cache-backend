@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.0" xmlns:t3="http://typo3.org/schemas/xliff">
+    <file t3:id="1504863782" source-language="en" datatype="plaintext" original="messages" date="2107-09-08T11:43:00Z" product-name="varnish_cache_backend">
+        <header/>
+        <body>
+            <trans-unit id="be_clear_cache.title">
+                <source>Clear Varnish Cache</source>
+            </trans-unit>
+            <trans-unit id="be_clear_cache.description">
+                <source>Send BAN command for all objects belonging to this installation.</source>
+            </trans-unit>
+            <trans-unit id="extconf.instancehostnames">
+                <source>Varnish Servers:By default, the Hostname of your Backend Connection is used to connect to
+                    Varnish which is usually fine. If your Varnish Server Hostname is different from your Backend Hostname or
+                    you run multiple Varnish Instances add those Hostnames here as a Comma separated List.
+                </source>
+            </trans-unit>
+            <trans-unit id="extconf.alwayssendtypo3headers">
+                <source>Always send TYPO3 Headers:Forces TYPO3 to always send TYPO3 cache specific headers. Is also set
+                    on the fly according [SYS][reverseProxyIP] and therefore usually not required.
+                </source>
+            </trans-unit>
+            <trans-unit id="extconf.banRequestMethod">
+                <source>HTTP request method for banning:By default the BAN request is sent to varnish to clear the
+                    cache. This is a nonstandard method and may be blocked by your network. In that case, choose another
+                    one (PURGE is standardised).
+                </source>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>
