@@ -20,7 +20,7 @@ class VarnishBackend extends AbstractBackend implements TaggableBackendInterface
     /**
      * @var bool
      */
-    protected $shortenHeaderValues = false;
+    protected $compression = false;
 
     /**
      * @var BanList
@@ -68,11 +68,11 @@ class VarnishBackend extends AbstractBackend implements TaggableBackendInterface
     }
 
     /**
-     * @param bool $shortenHeaderValues
+     * @param bool $compression
      */
-    public function setShortenHeaderValues(bool $shortenHeaderValues)
+    public function setCompression(bool $compression)
     {
-        $this->shortenHeaderValues = $shortenHeaderValues;
+        $this->compression = $compression;
     }
 
     /**
@@ -91,7 +91,7 @@ class VarnishBackend extends AbstractBackend implements TaggableBackendInterface
     {
         $GLOBALS['TSFE']->config['config']['additionalHeaders.']['1506001460.']['header'] = static::HEADER_CACHE_HASH . static::HEADER_VALUE_SEPARATOR . $entryIdentifier;
 
-        $headerValue = $this->cacheTagsHeaderValueEncoder->encode($tags, $this->shortenHeaderValues ? $this->cacheTagsHeaderValueEncoder::OPT_SHORTEN : 0);
+        $headerValue = $this->cacheTagsHeaderValueEncoder->encode($tags, $this->compression ? $this->cacheTagsHeaderValueEncoder::OPT_SHORTEN : 0);
         $GLOBALS['TSFE']->config['config']['additionalHeaders.']['1504798687.']['header'] = static::HEADER_CACHE_TAGS . static::HEADER_VALUE_SEPARATOR . $headerValue;
     }
 
@@ -165,7 +165,7 @@ class VarnishBackend extends AbstractBackend implements TaggableBackendInterface
     {
         $headerValue = $this->cacheTagHeaderPatternEncoder->encode(
             $tag,
-            $this->shortenHeaderValues ? $this->cacheTagHeaderPatternEncoder::OPT_SHORTEN : 0
+            $this->compression ? $this->cacheTagHeaderPatternEncoder::OPT_SHORTEN : 0
         );
         $this->banList->addBan(static::HEADER_CACHE_TAGS . static::HEADER_VALUE_SEPARATOR . $headerValue);
     }
