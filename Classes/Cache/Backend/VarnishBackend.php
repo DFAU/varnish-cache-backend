@@ -44,11 +44,10 @@ class VarnishBackend extends AbstractBackend implements TaggableBackendInterface
      */
     public function __construct($context, array $options = [])
     {
-        parent::__construct($context, $options);
-
         $this->banList = GeneralUtility::makeInstance(BanList::class);
         $this->cacheTagsHeaderValueEncoder = GeneralUtility::makeInstance(CacheTagsHeaderValueEncoder::class);
         $this->cacheTagHeaderPatternEncoder = GeneralUtility::makeInstance(CacheTagHeaderValuePatternEncoder::class);
+        parent::__construct($context, $options);
     }
 
     /**
