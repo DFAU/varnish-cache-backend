@@ -16,18 +16,8 @@ $EM_CONF[$_EXTKEY] = array(
 	'category' => 'fe',
 	'author' => 'Thomas Maroschik',
 	'author_email' => 'tmaroschik@dfau.de',
-	'shy' => '',
-	'dependencies' => 'cms',
-	'conflicts' => '',
-	'priority' => '',
-	'module' => '',
 	'state' => 'beta',
-	'internal' => '',
-	'uploadfolder' => 0,
 	'createDirs' => '',
-	'modify_tables' => '',
-	'clearCacheOnLoad' => 0,
-	'lockType' => '',
 	'author_company' => '',
 	'version' => '0.0.0',
 	'constraints' => array(
@@ -40,8 +30,6 @@ $EM_CONF[$_EXTKEY] = array(
 		),
 	),
 	'_md5_values_when_last_written' => '',
-	'suggests' => array(
-	),
 );
 
 ?>
