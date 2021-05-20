@@ -17,8 +17,5 @@
     "typo3/cms": {
       "extension-key": "varnish_cache_backend"
     }
-  },
-  "replace": {
-    "varnish_cache_backend": "self.version"
   }
 }

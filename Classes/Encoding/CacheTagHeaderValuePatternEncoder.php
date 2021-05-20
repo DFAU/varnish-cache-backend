@@ -1,10 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace DFAU\VarnishCacheBackend\Encoding;
 
-
 use DFAU\VarnishCacheBackend\Utility\Shortener;
-use TYPO3\CMS\Backend\Utility\BackendUtility;
 
 class CacheTagHeaderValuePatternEncoder
 {
@@ -28,5 +28,4 @@ class CacheTagHeaderValuePatternEncoder
         $pattern .= ';.*';
         return $pattern;
     }
-
 }

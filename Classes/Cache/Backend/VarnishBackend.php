@@ -1,8 +1,8 @@
 <?php
 
+declare(strict_types=1);
 
 namespace DFAU\VarnishCacheBackend\Cache\Backend;
-
 
 use DFAU\VarnishCacheBackend\Encoding\CacheTagHeaderValuePatternEncoder;
 use DFAU\VarnishCacheBackend\Encoding\CacheTagsHeaderValueEncoder;
@@ -17,28 +17,21 @@ class VarnishBackend extends AbstractBackend implements TaggableBackendInterface
     const HEADER_CACHE_TAGS = 'TYPO3-Cache-Tags';
     const HEADER_VALUE_SEPARATOR = ': ';
 
-    /**
-     * @var bool
-     */
+    /** @var bool */
     protected $compression = false;
 
-    /**
-     * @var BanList
-     */
+    /** @var BanList */
     protected $banList;
 
-    /**
-     * @var CacheTagsHeaderValueEncoder
-     */
+    /** @var CacheTagsHeaderValueEncoder */
     protected $cacheTagsHeaderValueEncoder;
 
-    /**
-     * @var CacheTagHeaderValuePatternEncoder
-     */
+    /** @var CacheTagHeaderValuePatternEncoder */
     protected $cacheTagHeaderPatternEncoder;
 
     /**
      * VarnishBackend constructor.
+     *
      * @param string $context
      * @param array $options
      */
@@ -81,9 +74,11 @@ class VarnishBackend extends AbstractBackend implements TaggableBackendInterface
      * @param string $data The data to be stored
      * @param array $tags Tags to associate with this cache entry. If the backend does not support tags, this option can be ignored.
      * @param int $lifetime Lifetime of this cache entry in seconds. If NULL is specified, the default lifetime is used. "0" means unlimited lifetime.
-     * @return void
-     * @throws \TYPO3\CMS\Core\Cache\Exception if no cache frontend has been set.
+     *
+     *
+     * @throws \TYPO3\CMS\Core\Cache\Exception if no cache frontend has been set
      * @throws \TYPO3\CMS\Core\Cache\Exception\InvalidDataException if the data is not a string
+     *
      * @api
      */
     public function set($entryIdentifier, $data, array $tags = [], $lifetime = null)
@@ -98,19 +93,23 @@ class VarnishBackend extends AbstractBackend implements TaggableBackendInterface
      * Loads data from the cache.
      *
      * @param string $entryIdentifier An identifier which describes the cache entry to load
+     *
      * @return mixed The cache entry's content as a string or FALSE if the cache entry could not be loaded
+     *
      * @api
      */
     public function get($entryIdentifier)
     {
-        return "";
+        return '';
     }
 
     /**
      * Checks if a cache entry with the specified identifier exists.
      *
      * @param string $entryIdentifier An identifier specifying the cache entry
+     *
      * @return bool TRUE if such an entry exists, FALSE if not
+     *
      * @api
      */
     public function has($entryIdentifier)
@@ -124,7 +123,9 @@ class VarnishBackend extends AbstractBackend implements TaggableBackendInterface
      * old entries for the identifier still exist, they are removed as well.
      *
      * @param string $entryIdentifier Specifies the cache entry to remove
+     *
      * @return bool TRUE if (at least) an entry could be removed or FALSE if no entry was found
+     *
      * @api
      */
     public function remove($entryIdentifier)
@@ -135,7 +136,7 @@ class VarnishBackend extends AbstractBackend implements TaggableBackendInterface
     /**
      * Removes all cache entries of this cache.
      *
-     * @return void
+     *
      * @api
      */
     public function flush()
@@ -146,7 +147,7 @@ class VarnishBackend extends AbstractBackend implements TaggableBackendInterface
     /**
      * Does garbage collection
      *
-     * @return void
+     *
      * @api
      */
     public function collectGarbage()
@@ -157,7 +158,8 @@ class VarnishBackend extends AbstractBackend implements TaggableBackendInterface
      * Removes all cache entries of this cache which are tagged by the specified tag.
      *
      * @param string $tag The tag the entries must have
-     * @return void
+     *
+     *
      * @api
      */
     public function flushByTag($tag)
@@ -179,7 +181,9 @@ class VarnishBackend extends AbstractBackend implements TaggableBackendInterface
      * specified tag
      *
      * @param string $tag The tag to search for
+     *
      * @return array An array with identifiers of all matching entries. An empty array if no entries matched
+     *
      * @api
      */
     public function findIdentifiersByTag($tag)

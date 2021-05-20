@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace DFAU\VarnishCacheBackend\Varnish;
 
 use TYPO3\CMS\Core\SingletonInterface;
@@ -7,31 +9,26 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class BanList implements SingletonInterface
 {
-
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $banRequestMethod = 'BAN';
 
-    /**
-     * @var array
-     */
+    /** @var array */
     protected $instanceHostnames = [];
 
-    /**
-     * @var \resource
-     */
+    /** @var \resource */
     protected $curlQueue;
 
     public function __construct(string $banRequestMethod = null, array $instanceHostnames = null)
     {
-        if ($banRequestMethod !== null) {
+        if (null !== $banRequestMethod) {
             $this->banRequestMethod = $banRequestMethod;
         }
-        if ($instanceHostnames === null) {
+
+        if (null === $instanceHostnames) {
             $this->instanceHostnames[] = GeneralUtility::getIndpEnv('HTTP_HOST');
         }
-        $this->curlQueue = curl_multi_init();
+
+        $this->curlQueue = \curl_multi_init();
     }
 
     public function setBanRequestMethod(string $banRequestMethod)
@@ -53,7 +50,7 @@ class BanList implements SingletonInterface
 
     protected function addCommand(string $method, string $url, array $header = [])
     {
-        $curlHandle = curl_init();
+        $curlHandle = \curl_init();
         $curlOptions = [
             CURLOPT_CUSTOMREQUEST => $method,
             CURLOPT_URL => $url,
@@ -62,19 +59,19 @@ class BanList implements SingletonInterface
             CURLOPT_RETURNTRANSFER => 1,
         ];
 
-        curl_setopt_array($curlHandle, $curlOptions);
-        curl_multi_add_handle($this->curlQueue, $curlHandle);
+        \curl_setopt_array($curlHandle, $curlOptions);
+        \curl_multi_add_handle($this->curlQueue, $curlHandle);
     }
 
     protected function runQueue()
     {
         $running = null;
         do {
-            curl_multi_exec($this->curlQueue, $running);
+            \curl_multi_exec($this->curlQueue, $running);
         } while ($running);
 
         // destroy Handle which is not required anymore
-        curl_multi_close($this->curlQueue);
+        \curl_multi_close($this->curlQueue);
     }
 
     public function __destruct()
