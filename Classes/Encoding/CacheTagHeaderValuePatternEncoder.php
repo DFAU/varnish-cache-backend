@@ -15,7 +15,7 @@ class CacheTagHeaderValuePatternEncoder
     public function encode(string $tag, int $options = self::OPT_SHORTEN): string
     {
         $parsedTag = $this->parseTag($tag);
-        return $this->buildHeaderValuePattern($parsedTag, $options & self::OPT_SHORTEN);
+        return $this->buildHeaderValuePattern($parsedTag, (bool) ($options & self::OPT_SHORTEN));
     }
 
     protected function buildHeaderValuePattern(array $tag, bool $shorten): string

@@ -83,6 +83,10 @@ class VarnishBackend extends AbstractBackend implements TaggableBackendInterface
      */
     public function set($entryIdentifier, $data, array $tags = [], $lifetime = null)
     {
+        if ($entryIdentifier === 'redirects') {
+            return;
+        }
+        $GLOBALS['TSFE']->config['config']['additionalHeaders.']['1506001460.']['header'] = 1;
         $GLOBALS['TSFE']->config['config']['additionalHeaders.']['1506001460.']['header'] = static::HEADER_CACHE_HASH . static::HEADER_VALUE_SEPARATOR . $entryIdentifier;
 
         $headerValue = $this->cacheTagsHeaderValueEncoder->encode($tags, $this->compression ? $this->cacheTagsHeaderValueEncoder::OPT_SHORTEN : 0);

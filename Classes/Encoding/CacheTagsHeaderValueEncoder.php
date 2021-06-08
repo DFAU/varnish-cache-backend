@@ -16,7 +16,7 @@ class CacheTagsHeaderValueEncoder
     {
         $parsedTags = \array_map([$this, 'parseTag'], \array_unique($tags));
         $groupedTags = $this->groupTags($parsedTags);
-        return $this->buildHeaderValue($groupedTags, $options & self::OPT_SHORTEN);
+        return $this->buildHeaderValue($groupedTags, (bool) ($options & self::OPT_SHORTEN));
     }
 
     protected function groupTags(array $parsedTags): array
