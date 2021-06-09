@@ -83,7 +83,7 @@ class VarnishBackend extends AbstractBackend implements TaggableBackendInterface
      */
     public function set($entryIdentifier, $data, array $tags = [], $lifetime = null)
     {
-        if ($entryIdentifier === 'redirects') {
+        if ($entryIdentifier === 'redirects' || strpos($entryIdentifier, 'errorPage') === 0) {
             return;
         }
         $GLOBALS['TSFE']->config['config']['additionalHeaders.']['1506001460.']['header'] = 1;
