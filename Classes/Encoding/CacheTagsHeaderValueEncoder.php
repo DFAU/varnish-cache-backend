@@ -44,7 +44,7 @@ class CacheTagsHeaderValueEncoder
                         return '';
                     }
 
-                    return $shorten ? Shortener::shortenInteger($tag) : $tag;
+                    return $shorten ? Shortener::shortenInteger($tag) : (string)$tag;
                 }, $tags);
                 return ($shorten ? Shortener::shortenString($group) : $group) . (0 !== \count($tags) ? '_' . \implode('_', $tags) : '');
             },
