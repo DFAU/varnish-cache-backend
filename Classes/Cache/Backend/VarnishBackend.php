@@ -134,6 +134,12 @@ class VarnishBackend extends AbstractBackend implements TaggableBackendInterface
      */
     public function remove($entryIdentifier)
     {
+        $this->logger->info(
+            'Issuing BAN',
+            [
+                'header' => static::HEADER_CACHE_HASH . static::HEADER_VALUE_SEPARATOR . $entryIdentifier,
+            ]
+        );
         $this->banList->addBan(static::HEADER_CACHE_HASH . static::HEADER_VALUE_SEPARATOR . $entryIdentifier);
     }
 
@@ -145,6 +151,12 @@ class VarnishBackend extends AbstractBackend implements TaggableBackendInterface
      */
     public function flush()
     {
+        $this->logger->error(
+            'Issuing BAN',
+            [
+                'header' => static::HEADER_CACHE_HASH . static::HEADER_VALUE_SEPARATOR . '.*',
+            ]
+        );
         $this->banList->addBan(static::HEADER_CACHE_HASH . static::HEADER_VALUE_SEPARATOR . '.*');
     }
 
@@ -172,11 +184,23 @@ class VarnishBackend extends AbstractBackend implements TaggableBackendInterface
             $tag,
             $this->compression ? $this->cacheTagHeaderPatternEncoder::OPT_SHORTEN : 0
         );
+        $this->logger->error(
+            'Issuing BAN',
+            [
+                'header' => static::HEADER_CACHE_TAGS . static::HEADER_VALUE_SEPARATOR . $headerValue,
+            ]
+        );
         $this->banList->addBan(static::HEADER_CACHE_TAGS . static::HEADER_VALUE_SEPARATOR . $headerValue);
     }
 
     public function flushByCustomBan(string $banHeader)
     {
+        $this->logger->error(
+            'Issuing BAN',
+            [
+                'header' => $banHeader,
+            ]
+        );
         $this->banList->addBan($banHeader);
     }
 
