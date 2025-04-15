@@ -10,10 +10,10 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 class BanList implements SingletonInterface
 {
     /** @var string */
-    protected $banRequestMethod = 'BAN';
+    protected string $banRequestMethod = 'BAN';
 
     /** @var array */
-    protected $instanceHostnames = [];
+    protected array $instanceHostnames = [];
 
     /** @var \resource */
     protected $curlQueue;

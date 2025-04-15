@@ -12,7 +12,7 @@ trait CacheTagParser
     {
         $tag = \str_replace('pageId', 'pages', $tag);
         if (1 === \preg_match('/^([a-z0-9_]+)_(\d+)$/i', $tag, $matches)) {
-            list($table, $uid) = BackendUtility::splitTable_Uid($tag);
+            [$table, $uid] = BackendUtility::splitTable_Uid($tag);
             return ['string' => $table, 'int' => (int) $uid];
         }
 

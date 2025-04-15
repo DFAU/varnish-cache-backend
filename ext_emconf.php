@@ -1,7 +1,7 @@
 <?php
 
 $EM_CONF[$_EXTKEY] = [
-    'title' => 'Varnish Cachge Backend',
+    'title' => 'Varnish Cache Backend',
     'description' => '',
     'category' => 'fe',
     'author' => 'Thomas Maroschik',
